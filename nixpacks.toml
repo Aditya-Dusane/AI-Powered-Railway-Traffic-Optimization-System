@@ -1,0 +1,17 @@
+# Nixpacks config — Railway build system
+# Installs Node.js 22 + Python 3.12 so Express can spawn Python agents at runtime.
+
+[phases.setup]
+nixPkgs = ["nodejs_22", "python312"]
+
+[phases.install]
+cmds = [
+  "npm install",
+  "pip install -r python/requirements.txt"
+]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "node server/server.js"

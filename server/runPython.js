@@ -9,7 +9,8 @@ const path = require('path');
  */
 function runPython(scriptName, payload = {}) {
     return new Promise((resolve, reject) => {
-        const pythonPath = 'python'; // Assumes 'python' is in PATH. Fallback to python3 if needed.
+        // On Linux (Railway/Render) the binary is 'python3'. On Windows it's 'python'.
+        const pythonPath = process.platform === 'win32' ? 'python' : 'python3';
         const scriptPath = path.join(__dirname, '..', 'python', scriptName);
         
         const child = spawn(pythonPath, [scriptPath]);
