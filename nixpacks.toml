@@ -5,8 +5,10 @@
 nixPkgs = ["nodejs_22", "python312"]
 
 [phases.install]
+# --include=dev ensures vite/@vitejs/plugin-react are installed even if NODE_ENV=production
 cmds = [
-  "npm install",
+  "npm install --include=dev",
+  "npm install --prefix server",
   "pip install -r python/requirements.txt"
 ]
 
