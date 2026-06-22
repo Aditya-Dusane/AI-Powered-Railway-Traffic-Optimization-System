@@ -6,12 +6,8 @@ services:
     plan: free
 
     # Build: install all deps, install Python deps, build the Vite frontend
-    buildCommand: >
-      npm install &&
-      npm install --prefix server &&
-      npm install --prefix frontend &&
-      pip install -r python/requirements.txt &&
-      npm run build --prefix frontend
+    # NOTE: We cd into frontend/ so that vite resolves from frontend/node_modules/.bin/
+    buildCommand: "npm install && npm install --prefix server && pip install -r python/requirements.txt && cd frontend && npm install && npm run build"
 
     # Start: Node server (serves API + built frontend/dist in production)
     startCommand: node server/server.js
