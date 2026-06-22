@@ -1,0 +1,24 @@
+# Enforce LF line endings for shell scripts to prevent CRLF issues on Linux
+*.sh text eol=lf
+
+# Source files: auto-detect
+*.js text=auto
+*.jsx text=auto
+*.ts text=auto
+*.tsx text=auto
+*.json text=auto
+*.md text=auto
+*.yaml text=auto
+*.yml text=auto
+*.py text=auto eol=lf
+*.css text=auto
+*.html text=auto
+
+# Binary files: no line ending conversion
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.db binary

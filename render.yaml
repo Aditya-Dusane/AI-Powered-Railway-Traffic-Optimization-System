@@ -5,11 +5,11 @@ services:
     region: oregon
     plan: free
 
-    # Build: runs build.sh which installs all deps then builds Vite frontend
-    # NOTE: We cd into frontend/ so that vite resolves from frontend/node_modules/.bin/
-    buildCommand: "bash build.sh"
+    # Single npm install covers all workspaces (root + frontend + server).
+    # vite is hoisted to root node_modules/.bin/ — no PATH issues.
+    buildCommand: "npm install && pip install -r python/requirements.txt && npm run build"
 
-    # Start: Node server (serves API + built frontend/dist in production)
+    # Start: Express serves API + built frontend/dist in production
     startCommand: node server/server.js
 
     # Health check
@@ -21,4 +21,4 @@ services:
       - key: PORT
         value: 3001
       - key: GROQ_API_KEY
-        sync: false   # You will paste the actual value in Render dashboard
+        sync: false
