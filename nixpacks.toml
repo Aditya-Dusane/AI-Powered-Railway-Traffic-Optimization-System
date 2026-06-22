@@ -1,13 +1,12 @@
-# Nixpacks config — Railway build system
-# Installs Node.js 22 + Python 3.12 so Express can spawn Python agents at runtime.
+# Nixpacks — tells Railway/Render to install Node 22 + Python 3.12
+# Both runtimes are needed: Node runs Express, Python runs AI agents
 
 [phases.setup]
 nixPkgs = ["nodejs_22", "python312"]
 
 [phases.install]
-# --include=dev ensures vite/@vitejs/plugin-react are installed even if NODE_ENV=production
 cmds = [
-  "npm install --include=dev",
+  "npm install",
   "npm install --prefix server",
   "pip install -r python/requirements.txt"
 ]

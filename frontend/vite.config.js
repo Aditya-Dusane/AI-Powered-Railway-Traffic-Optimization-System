@@ -3,25 +3,22 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+// __dirname equivalent in ESM
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// This config is used both locally (run from frontend/) and on Railway/Render
-// (run from project root via: vite build --config frontend/vite.config.js).
-// All paths are resolved relative to this file's directory (frontend/) so they
-// work correctly regardless of the working directory.
 export default defineConfig({
   plugins: [react()],
 
-  // Root is the frontend directory (where index.html lives)
+  // Always resolve from this file's directory (frontend/)
+  // so `vite build --config frontend/vite.config.js` works from the project root
   root: __dirname,
 
-  // Output goes to frontend/dist — Express serves this in production
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
   },
 
-  // Dev-only proxy — has no effect in production builds
+  // Dev-only proxy — ignored during `vite build`
   server: {
     proxy: {
       '/api': {

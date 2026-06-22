@@ -3,19 +3,18 @@
   "version": "1.0.0",
   "description": "RailSync AI - Intelligent Railway Operations Suite",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm start --prefix server\" \"npm run dev --prefix frontend\"",
-    "build": "npm run build --prefix frontend",
-    "start": "node server/server.js",
-    "server": "npm start --prefix server",
-    "client": "npm run dev --prefix frontend"
+    "build": "vite build --config frontend/vite.config.js",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
     "@vitejs/plugin-react": "^5.1.1",
     "vite": "^7.3.1"
   }

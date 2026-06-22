@@ -5,13 +5,14 @@ services:
     region: oregon
     plan: free
 
-    # KEY: npm install --include=dev forces devDependencies (vite, @vitejs/plugin-react)
-    # to be installed even when NODE_ENV=production is set in envVars below.
-    # Without --include=dev, npm skips devDeps in production mode → "vite: not found".
-    buildCommand: "npm install --include=dev && npm install --prefix server && pip install -r python/requirements.txt && npm run build"
+    # Step 1: Install root deps (includes vite — in dependencies, NOT devDependencies)
+    # Step 2: Install server-specific deps (express, cors)
+    # Step 3: Install Python deps (groq SDK)
+    # Step 4: Build Vite frontend → outputs to frontend/dist/
+    buildCommand: "npm install && npm install --prefix server && pip install -r python/requirements.txt && npm run build"
 
-    # Express serves the built frontend/dist + all /api/* routes
-    startCommand: node server/server.js
+    # Express serves /api/* routes + frontend/dist/ static files in production
+    startCommand: "node server/server.js"
 
     healthCheckPath: /health
 
@@ -21,4 +22,4 @@ services:
       - key: PORT
         value: 3001
       - key: GROQ_API_KEY
-        sync: false   # Paste actual value in Render dashboard → Environment tab
+        sync: false
