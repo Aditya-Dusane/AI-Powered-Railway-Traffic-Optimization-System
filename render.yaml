@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: railsync-ai
+    runtime: node
+    region: oregon
+    plan: free
+
+    # Build: install all deps, install Python deps, build the Vite frontend
+    buildCommand: >
+      npm install &&
+      npm install --prefix server &&
+      npm install --prefix frontend &&
+      pip install -r python/requirements.txt &&
+      npm run build --prefix frontend
+
+    # Start: Node server (serves API + built frontend/dist in production)
+    startCommand: node server/server.js
+
+    # Health check
+    healthCheckPath: /health
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: GROQ_API_KEY
+        sync: false   # You will paste the actual value in Render dashboard

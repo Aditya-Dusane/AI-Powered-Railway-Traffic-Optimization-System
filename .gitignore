@@ -1,0 +1,50 @@
+# Dependency directories
+node_modules/
+frontend/node_modules/
+server/node_modules/
+
+# Frontend builds
+dist/
+frontend/dist/
+frontend/dist-ssr/
+
+# Python environment and cache files
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+env/
+
+# Environment files (sensitive data)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Runtime / Database / State files
+python/shared/db.json
+railsync.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDEs and OS files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
